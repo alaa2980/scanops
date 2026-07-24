@@ -88,4 +88,98 @@ class YardScanController extends Controller
             'scan' => $scan
         ]);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Endpoints for React Map UI (Polling)
+    |--------------------------------------------------------------------------
+    */
+
+    public function apiStatus(int $id): JsonResponse
+    {
+        $scan = Auth::user()->yardScans()->findOrFail($id);
+
+        return response()->json([
+            'ok' => true,
+            'status' => $scan->status ?? 'pending',
+        ]);
+    }
+
+    public function apiProgress(int $id): JsonResponse
+    {
+        $scan = Auth::user()->yardScans()->findOrFail($id);
+
+        $total = $scan->sectors()->count();
+
+        $done = $scan->sectors()->where('detect_status', 'done')->count();
+        $failed = $scan->sectors()->where('detect_status', 'failed')->count();
+
+        $finished = $done + $failed;
+        $percent = $total > 0 ? round(($finished / $total) * 100, 1) : 0;
+
+        return response()->json([
+            'ok' => true,
+            'scan_id' => $scan->id,
+            'status' => $scan->status,
+            'total_cells' => $total, // حافظت على نفس المفتاح ليطابق الواجهة الأمامية
+            'done_cells' => $done,
+            'failed_cells' => $failed,
+            'finished_cells' => $finished,
+            'percent' => $percent,
+        ]);
+    }
+
+    public function apiDetections(int $id): JsonResponse
+    {
+        $scan = Auth::user()->yardScans()->findOrFail($id);
+        
+        $geo = $scan->boundaries_geojson;
+        $ring = $geo['coordinates'][0] ?? [];
+
+        // Remove closing point if duplicated
+        if (count($ring) >= 2 && $ring[0] === end($ring)) {
+            array_pop($ring);
+        }
+
+        // Ray casting algorithm (Point in Polygon)
+        $pointInPolygon = function(float $lon, float $lat) use ($ring): bool {
+            $inside = false;
+            $n = count($ring);
+            if ($n < 3) return false;
+
+            for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
+                $xi = (float) $ring[$i][0]; $yi = (float) $ring[$i][1];
+                $xj = (float) $ring[$j][0]; $yj = (float) $ring[$j][1];
+
+                $intersect = (($yi > $lat) != ($yj > $lat)) &&
+                    ($lon < ($xj - $xi) * ($lat - $yi) / (($yj - $yi) ?: 1e-12) + $xi);
+
+                if ($intersect) $inside = !$inside;
+            }
+            return $inside;
+        };
+
+        $detections = $scan->detections()->get();
+
+        // Filter and map to React expected format
+        $filtered = $detections->filter(function($d) use ($pointInPolygon) {
+            // Support both old (lat/lon) and new DB structures
+            $lat = $d->latitude ?? $d->lat;
+            $lon = $d->longitude ?? $d->lon;
+            
+            if ($lat === null || $lon === null) return false;
+            return $pointInPolygon((float)$lon, (float)$lat);
+        })->map(function($d) {
+            return [
+                'id' => $d->id,
+                'label' => $d->label,
+                'confidence' => $d->confidence,
+                'latitude' => (float) ($d->latitude ?? $d->lat),
+                'longitude' => (float) ($d->longitude ?? $d->lon),
+                'detected_at' => $d->detected_at,
+            ];
+        })->values();
+
+        return response()->json($filtered);
+    }
 }

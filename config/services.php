@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'mapbox' => [
+        'token' => env('MAPBOX_TOKEN'),
+        'user'  => env('MAPBOX_USER', 'mapbox'),
+        'style' => env('MAPBOX_STYLE', 'satellite-v9'),
+    ],
+
 ];

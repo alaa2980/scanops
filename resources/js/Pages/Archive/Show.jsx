@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 
-export default function ShowArchiveDetails({ scan, detections, filters }) {
+export default function ShowArchiveDetails({ scan, detections, filters, progress }) {
     // إدارة حالة البحث
     const [searchQuery, setSearchQuery] = useState(filters?.dq || '');
 
@@ -24,7 +24,7 @@ export default function ShowArchiveDetails({ scan, detections, filters }) {
     };
     
     const currentStatus = statusConfig[scan.status?.toLowerCase()] || statusConfig.queued;
-    const progressPercent = scan.progress_percent || 0;
+    const progressPercent = progress?.percent || 0;
 
     return (
         <AppLayout>
@@ -106,7 +106,8 @@ export default function ShowArchiveDetails({ scan, detections, filters }) {
                     <div className="bg-slate-900/50 backdrop-blur-xl border border-white/5 rounded-3xl p-6 shadow-lg relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Targets Detected</div>
-                        <div className="text-4xl font-black text-white">{scan.trucks_count || 0}</div>
+                        {/* تم التعديل هنا ليقرأ من إجمالي الاكتشافات القادمة من الباك إند */}
+                        <div className="text-4xl font-black text-white">{detections.total || 0}</div>
                         <div className="mt-3 text-[11px] text-slate-500 font-medium">Total fleet units identified</div>
                     </div>
 
@@ -114,7 +115,8 @@ export default function ShowArchiveDetails({ scan, detections, filters }) {
                     <div className="bg-slate-900/50 backdrop-blur-xl border border-white/5 rounded-3xl p-6 shadow-lg col-span-1 md:col-span-2">
                         <div className="flex items-center justify-between mb-4">
                             <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Sector Processing Progress</div>
-                            <div className="text-xs font-bold text-white">{progressPercent}% ({scan.cells_finished || 0}/{scan.cells_total || 0})</div>
+                            {/* تم التعديل هنا ليقرأ من progress */}
+                            <div className="text-xs font-bold text-white">{progressPercent}% ({progress?.finished || 0}/{progress?.total || 0})</div>
                         </div>
                         
                         <div className="h-2.5 rounded-full bg-slate-800 overflow-hidden mb-6">
@@ -127,15 +129,18 @@ export default function ShowArchiveDetails({ scan, detections, filters }) {
                         <div className="grid grid-cols-3 gap-4">
                             <div className="bg-slate-800/40 rounded-xl p-3 border border-white/5">
                                 <div className="text-[10px] text-slate-400 uppercase font-bold">Done</div>
-                                <div className="text-lg font-black text-white">{scan.cells_done || 0}</div>
+                                {/* تم التعديل هنا */}
+                                <div className="text-lg font-black text-white">{progress?.done || 0}</div>
                             </div>
                             <div className="bg-slate-800/40 rounded-xl p-3 border border-white/5">
                                 <div className="text-[10px] text-slate-400 uppercase font-bold">Failed</div>
-                                <div className="text-lg font-black text-red-400">{scan.cells_failed || 0}</div>
+                                {/* تم التعديل هنا */}
+                                <div className="text-lg font-black text-red-400">{progress?.failed || 0}</div>
                             </div>
                             <div className="bg-slate-800/40 rounded-xl p-3 border border-white/5">
                                 <div className="text-[10px] text-slate-400 uppercase font-bold">Pending</div>
-                                <div className="text-lg font-black text-sky-400">{scan.cells_pending || 0}</div>
+                                {/* تم التعديل هنا */}
+                                <div className="text-lg font-black text-sky-400">{progress?.pending || 0}</div>
                             </div>
                         </div>
                     </div>
@@ -195,21 +200,21 @@ export default function ShowArchiveDetails({ scan, detections, filters }) {
                                             <td className="px-6 py-4 text-sm text-slate-300 font-mono">#{d.id}</td>
                                             <td className="px-6 py-4">
                                                 <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                                                    {d.label || 'Unknown'}
+                                                    {d.vehicle_type || 'Unknown'}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-2">
                                                     <div className="w-16 h-1.5 rounded-full bg-slate-700 overflow-hidden">
-                                                        <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(d.confidence || 0) * 100}%` }}></div>
+                                                        <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(d.confidence_score || 0) * 100}%` }}></div>
                                                     </div>
                                                     <span className="text-sm font-bold text-slate-200">
-                                                        {Number(d.confidence).toFixed(2)}
+                                                        {Number(d.confidence_score || 0).toFixed(2)}
                                                     </span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-sm text-slate-400 font-mono">
-                                                {Number(d.lat).toFixed(6)}, {Number(d.lon).toFixed(6)}
+                                                {Number(d.latitude).toFixed(6)}, {Number(d.longitude).toFixed(6)}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-slate-400">
                                                 {new Date(d.detected_at).toLocaleString('en-GB', { dateStyle: 'short', timeStyle: 'short' })}

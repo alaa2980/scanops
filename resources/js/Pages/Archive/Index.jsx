@@ -149,7 +149,7 @@ export default function ScanArchive({ scans, filters }) {
                                                     <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                                                         <svg className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 7h-3V6a4 4 0 0 0-8 0H5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h1a3 3 0 0 0 6 0h4a3 3 0 0 0 6 0h1a1 1 0 0 0 1-1V9a2 2 0 0 0-2-2z"/></svg>
                                                     </div>
-                                                    <span className="text-lg font-black text-white">{scan.trucks_count || 0}</span>
+                                                    <span className="text-lg font-black text-white">{scan.fleet_count || 0}</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">

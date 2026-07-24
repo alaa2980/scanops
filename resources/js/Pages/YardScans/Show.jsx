@@ -5,7 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import AppLayout from '@/Layouts/AppLayout';
 
-export default function ShowYardScan({ yardScan }) {
+export default function ShowYardScan({ scan }) {
     // 1. إدارة الحالة
     const [detections, setDetections] = useState([]);
     const [truckCount, setTruckCount] = useState(0);
@@ -25,7 +25,7 @@ export default function ShowYardScan({ yardScan }) {
         failed: { color: 'text-red-400', bg: 'bg-red-400/10', border: 'border-red-500/30', dot: 'bg-red-400' },
         queued: { color: 'text-sky-400', bg: 'bg-sky-400/10', border: 'border-sky-500/30', dot: 'bg-sky-400' },
     };
-    const currentStatus = statusConfig[yardScan.status?.toLowerCase()] || statusConfig.queued;
+    const currentStatus = statusConfig[scan.status?.toLowerCase()] || statusConfig.queued;
 
     // 3. تهيئة الخريطة ورسم المضلع الأساسي
     useEffect(() => {
@@ -43,8 +43,8 @@ export default function ShowYardScan({ yardScan }) {
             layersRef.current.detections.addTo(map);
 
             // رسم المضلع (Zone Boundary)
-            if (yardScan.boundaries_geojson) {
-                const polygonLayer = L.geoJSON(yardScan.boundaries_geojson, {
+            if (scan.boundaries_geojson) {
+                const polygonLayer = L.geoJSON(scan.boundaries_geojson, {
                     style: { color: '#38bdf8', weight: 2, fillOpacity: 0.1 }
                 }).addTo(map);
                 
@@ -70,12 +70,12 @@ export default function ShowYardScan({ yardScan }) {
     const fetchDetections = async () => {
         setIsRefreshing(true);
         try {
-            const response = await axios.get(route('yard_scans.api.detections', yardScan.id));
+            const response = await axios.get(route('yard_scans.api.detections', scan.id));
             if (response.data) {
                 setDetections(response.data);
                 
                 // حساب عدد الشاحنات فقط
-                const count = response.data.filter(d => (d.label || '').toLowerCase() === 'truck').length;
+                const count = response.data.length;
                 setTruckCount(count);
             }
         } catch (error) {
@@ -139,24 +139,24 @@ export default function ShowYardScan({ yardScan }) {
 
     return (
         <AppLayout>
-            <Head title={`Scan Details #${yardScan.id}`} />
+            <Head title={`Scan Details #${scan.id}`} />
 
             {/* Header Section */}
             <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <h1 className="text-2xl font-extrabold text-white tracking-tight">
-                        Operation <span className="text-slate-400">#{yardScan.reference_code || yardScan.id}</span>
+                        Operation <span className="text-slate-400">#{scan.reference_code || scan.id}</span>
                     </h1>
                     
                     <span className="text-slate-600">|</span>
                     
                     <span className="text-sm font-medium text-slate-400">
-                        {new Date(yardScan.created_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}
+                        {new Date(scan.created_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}
                     </span>
 
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full border ${currentStatus.bg} ${currentStatus.border} ${currentStatus.color} capitalize`}>
                         <span className={`h-2 w-2 rounded-full ${currentStatus.dot} animate-pulse`}></span>
-                        {yardScan.status}
+                        {scan.status}
                     </span>
                 </div>
 
@@ -189,7 +189,7 @@ export default function ShowYardScan({ yardScan }) {
                     <div className="flex flex-col">
                         <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-0.5">System Status</span>
                         <div className={`text-sm font-black capitalize ${currentStatus.color}`}>
-                            {yardScan.status}
+                            {scan.status}
                         </div>
                     </div>
 
