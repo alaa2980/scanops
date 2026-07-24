@@ -91,9 +91,9 @@ export default function AdminScanMap({ scan }) {
                             <span class="text-gray-500 font-semibold">Type:</span>
                             <span class="font-bold text-gray-800 capitalize">${d.vehicle_type || 'Unknown'}</span>
                         </div>
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="text-gray-500 font-semibold">Confidence:</span>
-                            <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">${Number(d.confidence_score).toFixed(2)}</span>
+                        <div className="flex justify-between items-center text-xs">
+                            <span className="text-gray-500 font-semibold">Confidence:</span>
+                            <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">${Number(d.confidence_score || 0).toFixed(2)}</span>
                         </div>
                         <div class="flex justify-between items-center text-xs">
                             <span class="text-gray-500 font-semibold">Coords:</span>
