@@ -18,8 +18,8 @@ use App\Http\Controllers\Admin\AdminYardScanController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', fn () => Inertia::render('Site/Home'))->name('home');
-Route::get('/about', fn () => Inertia::render('Public/About'))->name('about');
-Route::get('/contact', fn () => Inertia::render('Public/Contact'))->name('contact');
+Route::get('/about', fn () => Inertia::render('Site/About'))->name('about');
+Route::get('/contact', fn () => Inertia::render('Site/Contact'))->name('contact');
 
 /*
 |--------------------------------------------------------------------------

@@ -5,176 +5,181 @@ import SiteLayout from '@/Layouts/SiteLayout';
 export default function Home() {
     const { auth } = usePage().props;
 
-    const steps = [
-        {
-            title: 'Define Sector Boundary',
-            desc: 'Interactively pinpoint 4 precise coordinates on high-resolution satellite imagery to enclose the port terminal or logistics yard.',
-            icon: (
-                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            ),
-            bg: 'bg-emerald-500/15 border-emerald-500/30'
-        },
-        {
-            title: 'AI Vision Pipeline',
-            desc: 'Our deep learning models execute automated object detection to isolate commercial transport vehicles within the target boundary.',
-            icon: (
-                <svg className="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
-            ),
-            bg: 'bg-sky-500/15 border-sky-500/30'
-        },
-        {
-            title: 'Geospatial Intelligence',
-            desc: 'Instantly retrieve accurate inventory metrics, spatial distribution markers, and audit-ready reports stored securely in the cloud.',
-            icon: (
-                <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
-            ),
-            bg: 'bg-purple-500/15 border-purple-500/30'
-        }
-    ];
-
-    const faqs = [
-        {
-            q: 'What objects does the computer vision pipeline detect?',
-            a: 'The core neural engine specializes in commercial transport trucks and logistics assets, filtering out irrelevant objects to extract clean, verified operational counts.'
-        },
-        {
-            q: 'How are terminal sectors defined on the map?',
-            a: 'Operators zoom into the desired port or terminal area and designate 4 distinct geospatial points to generate a restricted polygonal analysis boundary.'
-        },
-        {
-            q: 'Where is the analysis telemetry stored?',
-            a: 'All session metrics, bounding coordinates, and detection timestamps are persisted in a secure database layer for compliance reporting and historical auditing.'
-        },
-        {
-            q: 'Can supervisors review past scanning operations?',
-            a: 'Yes. Authorized personnel can access the complete enterprise archive at any time, complete with live Leaflet map reconstruction capabilities.'
-        }
-    ];
-
     return (
         <SiteLayout>
-            <Head title="ScanOps | Enterprise Fleet Intelligence" />
+            <Head title="ScanOps | Geospatial Fleet Intelligence" />
 
-            {/* Hero Section */}
-            <section className="max-w-6xl mx-auto px-4 pt-20 pb-16">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* 1. HERO SECTION (تم تقليص المسافة العلوية هنا pt-8 و md:pt-16) */}
+            <section className="relative pt-8 pb-16 md:pt-16 md:pb-32 overflow-hidden">
+                <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
                     
-                    {/* Left Column (Copywriting) */}
-                    <div>
-                        <div className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-emerald-400 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 shadow-inner">
-                            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            Geospatial AI & Automated Port Monitoring
-                        </div>
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-xs font-semibold text-emerald-400 mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        ScanOps Engine v2.0
+                    </div>
 
-                        <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-                            Port Logistics Intelligence <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400">Powered by AI</span>
-                        </h1>
+                    {/* Headline */}
+                    <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1.05] mb-8">
+                        Automate fleet detection <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-slate-400 to-slate-600">from orbit to terminal.</span>
+                    </h1>
 
-                        <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
-                            Automate fleet counting and spatial auditing across complex terminal yards using high-resolution satellite imagery, custom polygonal boundaries, and advanced computer vision.
-                        </p>
+                    <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+                        Deploy advanced computer vision over static satellite imagery. Define your boundaries, run the pipeline, and let AI map your assets with pinpoint accuracy.
+                    </p>
 
-                        <div className="mt-8 flex flex-wrap items-center gap-4">
-                            <Link
-                                href={route('login')}
-                                className="rounded-2xl px-8 py-4 bg-emerald-500 text-gray-900 font-extrabold hover:bg-emerald-400 transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] text-sm"
+                    {/* CTA Buttons (تمت إضافة لون النص المضمن للأزرار البيضاء) */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+                        {auth?.user ? (
+                            <Link 
+                                href={route('yard_scans.create')} 
+                                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white font-bold hover:bg-slate-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+                                style={{ color: '#0f172a' }}
                             >
-                                Access Platform
+                                Enter Console
                             </Link>
-
-                            {auth?.user ? (
-                                <Link
-                                    href={route('yard_scans.create')}
-                                    className="rounded-2xl px-8 py-4 border border-white/10 bg-white/5 hover:bg-white/10 transition-all font-bold text-sm text-slate-200"
-                                >
-                                    Open Dispatcher Console
-                                </Link>
-                            ) : (
-                                <Link
-                                    href={route('login')}
-                                    className="rounded-2xl px-8 py-4 border border-white/10 bg-white/5 hover:bg-white/10 transition-all font-bold text-sm text-slate-200"
-                                >
-                                    Request Enterprise Trial
-                                </Link>
-                            )}
-                        </div>
-
-                        {/* Quick Stats Grid */}
-                        <div className="mt-12 grid grid-cols-3 gap-4">
-                            <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
-                                <div className="text-2xl sm:text-3xl font-black text-white">4-Point</div>
-                                <div className="text-xs text-slate-400 mt-1 font-semibold">Polygon Zoning</div>
-                            </div>
-                            <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
-                                <div className="text-2xl sm:text-3xl font-black text-emerald-400">99.4%</div>
-                                <div className="text-xs text-slate-400 mt-1 font-semibold">Detection Accuracy</div>
-                            </div>
-                            <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
-                                <div className="text-2xl sm:text-3xl font-black text-sky-400">GIS</div>
-                                <div className="text-xs text-slate-400 mt-1 font-semibold">Leaflet Mapping</div>
-                            </div>
-                        </div>
+                        ) : (
+                            <Link 
+                                href={route('login')} 
+                                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white font-bold hover:bg-slate-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+                                style={{ color: '#0f172a' }}
+                            >
+                                Get Started
+                            </Link>
+                        )}
+                        <a 
+                            href="#architecture" 
+                            className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md font-semibold hover:bg-white/10 transition-colors"
+                            style={{ color: '#ffffff' }}
+                        >
+                            Explore Platform
+                        </a>
                     </div>
 
-                    {/* Right Column (Workflow Card Component) */}
-                    <div className="relative">
-                        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/90 to-slate-950/90 p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+                    {/* Abstract Abstract UI Mockup (The "Wow" Factor) */}
+                    <div className="relative mx-auto max-w-4xl aspect-[21/9] rounded-2xl border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-xl shadow-[0_0_80px_rgba(16,185,129,0.1)] overflow-hidden flex flex-col">
+                        {/* Mock Window Header */}
+                        <div className="h-10 border-b border-white/5 flex items-center px-4 gap-2 bg-white/[0.02]">
+                            <div className="w-3 h-3 rounded-full bg-white/10"></div>
+                            <div className="w-3 h-3 rounded-full bg-white/10"></div>
+                            <div className="w-3 h-3 rounded-full bg-white/10"></div>
+                            <div className="mx-auto text-[10px] font-mono text-slate-500 tracking-widest">SCANOPS_TERMINAL_VIEW</div>
+                        </div>
+                        {/* Mock Map Area */}
+                        <div className="flex-1 relative bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.05),transparent_70%)] flex items-center justify-center">
+                            {/* Abstract Polygon */}
+                            <svg className="w-64 h-64 text-emerald-500/20 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]" viewBox="0 0 100 100">
+                                <polygon points="20,80 80,90 90,20 10,10" fill="currentColor" stroke="rgba(16,185,129,0.5)" strokeWidth="1" />
+                                {/* Scanning Line Animation */}
+                                <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(16,185,129,0.8)" strokeWidth="0.5" className="animate-[bounce_4s_ease-in-out_infinite]" />
+                            </svg>
+                            {/* Mock Detections */}
+                            <div className="absolute top-1/3 left-1/3 w-2 h-2 rounded-[2px] bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,1)]"></div>
+                            <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-[2px] bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,1)]"></div>
+                            <div className="absolute bottom-1/3 right-1/3 w-2 h-2 rounded-[2px] bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,1)]"></div>
                             
-                            <div className="flex items-center justify-between pb-6 border-b border-white/5">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                    <span className="font-extrabold text-white tracking-wide">Operational Workflow</span>
-                                </div>
-                                <span className="text-xs font-bold font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">3-Step Pipeline</span>
-                            </div>
-
-                            <div className="mt-6 space-y-4">
-                                {steps.map((step, idx) => (
-                                    <div key={idx} className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 hover:bg-white/[0.04] transition-colors">
-                                        <div className="flex items-start gap-4">
-                                            <div className={`h-10 w-10 rounded-xl border flex items-center justify-center shrink-0 shadow-inner ${step.bg}`}>
-                                                {step.icon}
-                                            </div>
-                                            <div>
-                                                <div className="font-bold text-white text-base">{step.title}</div>
-                                                <div className="text-sm text-slate-400 mt-1 leading-relaxed">{step.desc}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-200/90 flex items-start gap-3">
-                                <svg className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                <div>
-                                    <span className="font-bold text-amber-400">Security Notice:</span> Telemetry filters out-of-bounds anomalies automatically, verifying that objects strictly fall within designated terminal polygons.
-                                </div>
+                            {/* Floating Stats Card inside the mock */}
+                            <div className="absolute bottom-4 left-4 rounded-xl border border-white/10 bg-black/50 backdrop-blur-md p-3">
+                                <div className="text-[9px] text-slate-400 uppercase tracking-widest mb-1">Detections</div>
+                                <div className="text-lg font-bold text-white leading-none">1,402</div>
                             </div>
                         </div>
-
-                        {/* Ambient Glow Effects */}
-                        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none"></div>
-                        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky-500/15 blur-3xl pointer-events-none"></div>
                     </div>
-
                 </div>
             </section>
 
-            {/* FAQ Section */}
-            <section className="max-w-6xl mx-auto px-4 py-16">
-                <div className="rounded-3xl border border-white/10 bg-slate-900/40 p-8 sm:p-12 backdrop-blur-xl shadow-xl">
-                    <div className="max-w-2xl">
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Frequently Asked Questions</h2>
-                        <p className="text-sm text-slate-400 mt-2">Everything you need to know about the ScanOps geospatial analytics platform.</p>
+            {/* 2. BENTO GRID FEATURES */}
+            <section id="architecture" className="py-24 border-t border-white/5 relative z-10">
+                <div className="max-w-5xl mx-auto px-4">
+                    <div className="mb-16">
+                        <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">System Capabilities</h2>
+                        <p className="text-slate-400 mt-3 text-lg font-light">Engineered for accuracy, scale, and operational simplicity.</p>
                     </div>
 
-                    <div className="mt-8 grid md:grid-cols-2 gap-6">
-                        {faqs.map((faq, index) => (
-                            <div key={index} className="rounded-2xl border border-white/5 bg-slate-800/40 p-6 shadow-inner">
-                                <h3 className="font-bold text-white text-base">{faq.q}</h3>
-                                <p className="mt-2 text-sm text-slate-300 leading-relaxed">{faq.a}</p>
+                    {/* Grid Container */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        {/* Feature 1 (Spans 2 columns) */}
+                        <div className="md:col-span-2 rounded-3xl border border-white/5 bg-[#0A0A0A]/50 backdrop-blur-sm p-8 hover:bg-[#0A0A0A]/80 transition-colors group overflow-hidden relative">
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 mb-6">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-2">Precision Targeting</h3>
+                                <p className="text-slate-400 leading-relaxed max-w-md">
+                                    Draw custom 4-point polygonal boundaries on high-resolution maps to isolate specific terminal zones with absolute precision, filtering out irrelevant noise.
+                                </p>
                             </div>
-                        ))}
+                            {/* Decorative background element */}
+                            <div className="absolute right-0 bottom-0 opacity-10 group-hover:opacity-20 transition-opacity translate-x-1/4 translate-y-1/4">
+                                <svg className="w-64 h-64 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.5" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+                            </div>
+                        </div>
+
+                        {/* Feature 2 (1 column) */}
+                        <div className="rounded-3xl border border-white/5 bg-[#0A0A0A]/50 backdrop-blur-sm p-8 hover:bg-[#0A0A0A]/80 transition-colors">
+                            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 mb-6">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" /></svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">AI Vision</h3>
+                            <p className="text-slate-400 leading-relaxed text-sm">
+                                Leverage state-of-the-art computer vision models designed specifically to identify and classify commercial freight trucks from satellite imagery.
+                            </p>
+                        </div>
+
+                        {/* Feature 3 (Spans 3 columns visually like a wide banner) */}
+                        <div className="md:col-span-3 rounded-3xl border border-white/5 bg-[#0A0A0A]/50 backdrop-blur-sm p-8 md:p-12 hover:bg-[#0A0A0A]/80 transition-colors flex flex-col md:flex-row items-center gap-8 justify-between">
+                            <div className="max-w-xl">
+                                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-400 mb-6">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-3">Geospatial Reports & Archives</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    Generate immediate, audit-ready data sets featuring exact coordinate mapping, confidence scores, and time-stamped logs. Every scan is permanently archived for historical review.
+                                </p>
+                            </div>
+                            
+                            {/* Mini UI stat element */}
+                            <div className="w-full md:w-auto shrink-0 flex gap-4">
+                                <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 flex flex-col items-center justify-center min-w-[120px]">
+                                    <span className="text-2xl font-black text-white">99.4%</span>
+                                    <span className="text-[10px] uppercase tracking-wider text-slate-500 mt-1">Accuracy</span>
+                                </div>
+                                <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 flex flex-col items-center justify-center min-w-[120px]">
+                                    <span className="text-2xl font-black text-white">&lt;2s</span>
+                                    <span className="text-[10px] uppercase tracking-wider text-slate-500 mt-1">Latency</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. FAQ SECTION - Clean Text */}
+            <section className="py-24 border-t border-white/5 relative z-10 bg-gradient-to-b from-transparent to-[#050505]">
+                <div className="max-w-3xl mx-auto px-4">
+                    <div className="mb-16">
+                        <h2 className="text-3xl font-black text-white tracking-tight">Frequently Asked Questions</h2>
+                    </div>
+
+                    <div className="space-y-10">
+                        <div className="pb-10 border-b border-white/5">
+                            <h4 className="text-lg font-bold text-white mb-3">What is ScanOps built for?</h4>
+                            <p className="text-slate-400 leading-relaxed">ScanOps is an enterprise-grade platform designed to automate the counting and spatial auditing of commercial transport trucks in designated port terminals and logistics yards.</p>
+                        </div>
+                        <div className="pb-10 border-b border-white/5">
+                            <h4 className="text-lg font-bold text-white mb-3">How does the region selection work?</h4>
+                            <p className="text-slate-400 leading-relaxed">Operators interact with a high-resolution Leaflet map to pinpoint exactly 4 coordinates. The system then restricts all computer vision analysis strictly to this defined polygon.</p>
+                        </div>
+                        <div className="pb-10 border-b border-white/5">
+                            <h4 className="text-lg font-bold text-white mb-3">Is the data stored securely?</h4>
+                            <p className="text-slate-400 leading-relaxed">Yes. All detection logs, including geospatial coordinates, timestamps, and confidence scores, are permanently stored in a relational database for compliance and historical review.</p>
+                        </div>
                     </div>
                 </div>
             </section>
