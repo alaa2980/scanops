@@ -19,7 +19,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <SiteLayout>
-            <Head title="TruckScope | Secure Authentication" />
+            <Head title="ScanOps | Secure Authentication" />
 
             {/* تم التعديل هنا فقط: pt-8 pb-16 بدلاً من py-16 */}
             <section className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] pt-8 pb-16 px-4">
@@ -138,7 +138,7 @@ export default function Login({ status, canResetPassword }) {
                     {/* Divider */}
                     <div className="my-8 flex items-center gap-4">
                         <div className="flex-1 h-px bg-white/5"></div>
-                        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">New to TruckScope?</div>
+                        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">New to ScanOps?</div>
                         <div className="flex-1 h-px bg-white/5"></div>
                     </div>
 

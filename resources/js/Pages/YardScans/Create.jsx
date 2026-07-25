@@ -24,7 +24,7 @@ export default function CreateYardScan() {
         if (!mapRef.current) {
             const map = L.map('map-container', {
                 zoomControl: false, // Custom UI approach, hide default zoom
-            }).setView([28.3835, 36.5662], 11);
+            }).setView([33.7438, -118.2673], 14);
             
             // Add zoom control to bottom right for cleaner top area
             L.control.zoom({ position: 'bottomright' }).addTo(map);
@@ -210,7 +210,7 @@ export default function CreateYardScan() {
             layersRef.current.polygon = null;
         }
         
-        mapRef.current.setView([28.3835, 36.5662], 11, { animate: true });
+        mapRef.current.setView([33.7438, -118.2673], 14, { animate: true });
     };
 
     const ThemeConfig = {

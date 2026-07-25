@@ -43,7 +43,7 @@ export default function About() {
 
     return (
         <SiteLayout>
-            <Head title="TruckScope | Platform Architecture" />
+            <Head title="ScanOps | Platform Architecture" />
 
             {/* Header Section */}
             {/* التعديل الوحيد هنا: تقليل المسافة العلوية pt-8 و md:pt-16 */}
@@ -57,7 +57,7 @@ export default function About() {
                             Bridging the gap between <span className="text-slate-400">orbital data</span> and terminal operations.
                         </h1>
                         <p className="text-lg text-slate-400 leading-relaxed">
-                            TruckScope replaces manual, error-prone yard auditing with an automated, AI-driven pipeline. 
+                            ScanOps replaces manual, error-prone yard auditing with an automated, AI-driven pipeline. 
                             By combining static satellite imagery with advanced object detection, we provide logistics 
                             managers with a scalable tool to quantify fleet presence inside custom-defined geospatial zones.
                         </p>
@@ -76,7 +76,7 @@ export default function About() {
                             </p>
                         </div>
                         <div>
-                            <h2 className="text-sm font-bold tracking-widest text-emerald-500 uppercase mb-4">The TruckScope Solution</h2>
+                            <h2 className="text-sm font-bold tracking-widest text-emerald-500 uppercase mb-4">The ScanOps Solution</h2>
                             <p className="text-slate-300 leading-relaxed">
                                 We digitize the auditing process. By drawing a simple bounding polygon on a digital map, users trigger a highly optimized analysis pipeline. The system handles image acquisition, object isolation, and coordinate mapping automatically, securely logging every verified truck into an immutable historical record.
                             </p>
@@ -90,7 +90,7 @@ export default function About() {
                 <div className="max-w-5xl mx-auto px-4">
                     <div className="mb-12">
                         <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Platform Architecture</h2>
-                        <p className="text-sm text-slate-400 mt-2">How data flows through the TruckScope ecosystem.</p>
+                        <p className="text-sm text-slate-400 mt-2">How data flows through the ScanOps ecosystem.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
