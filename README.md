@@ -22,14 +22,14 @@ A comprehensive administrative dashboard providing a real-time overview of logis
 ### 2. Geospatial Targeting
 Dispatchers can draw precision polygons over target logistical zones using interactive mapping tools. The system automatically breaks down massive yards into manageable processing sectors (Grid System).
 
-![Geospatial Targeting](./docs/images/After%20identifying%20four%20points.jpg)
+![Geospatial Targeting](./docs/images/After%20identifying%20four%20points.png)
 
 ### 3. Live AI Execution & Telemetry
 Once a scan is initiated, the platform leverages optimized concurrent API requests and long-polling to provide live feedback. The YOLOv8 object detection model scans the sectors, pinpointing commercial trucks with high confidence scores in real-time.
 
-![Processing Execution](./docs/images/Scan%20processing%20progress%20status.jpg)
+![Processing Execution](./docs/images/Scan%20processing%20progress%20status.png)
 
-![Scan Complete](./docs/images/After%20the%20scan%20processing%20is%20complete.jpg)
+![Scan Complete](./docs/images/After%20the%20scan%20processing%20is%20complete.png)
 
 ### 4. Operational Audit & Archive
 A structured archive system for tracking historical operations. Every scan retains detailed coordinates, confidence scores, and processing timelines for auditing and future data analysis.
