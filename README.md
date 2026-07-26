@@ -8,81 +8,109 @@
 
 **ScanOps** is an enterprise-grade B2B platform designed specifically for the construction and logistics sectors. It bridges the gap between modern web applications and computer vision, enabling operations teams to scan large logistical yards via satellite imagery and automatically detect commercial truck fleets using advanced Machine Learning models.
 
-## Core Features
+---
 
-*   **Interactive Geo-Scanning:** Draw precision polygons over target logistical zones using Mapbox and Leaflet integrations, breaking down massive yards into manageable processing sectors.
-*   **AI Fleet Detection:** Seamless integration with a custom-trained **YOLOv8** object detection model (managed via Roboflow) to identify and pinpoint commercial trucks with high confidence scores.
-*   **Real-Time Progress Tracking:** Utilizes optimized concurrent API requests and long-polling to provide live feedback on sector processing and truck detection without page reloads.
-*   **Enterprise Dashboard:** A custom-built, zero-dependency analytics dashboard featuring native Tailwind CSS charts, tracking system health, team performance, and fleet detection volumes.
-*   **Role-Based Access Control (RBAC):** Hierarchical access levels (`Admin`, `Manager`, `Dispatcher`) powered by strict Laravel Middleware, ensuring data security and operational integrity.
+## Operational Workflow
+
+ScanOps is built around a logical, step-by-step geospatial processing pipeline designed for high performance and strict operational control.
+
+### 1. System Command Center
+A comprehensive administrative dashboard providing a real-time overview of logistics scans, fleet detections, system health, and workforce management. Built with a zero-dependency, modern Glassmorphism UI.
+
+![Admin Dashboard](./docs/images/Admin%20dashboard.png)
+
+### 2. Geospatial Targeting
+Dispatchers can draw precision polygons over target logistical zones using interactive mapping tools. The system automatically breaks down massive yards into manageable processing sectors (Grid System).
+
+![Geospatial Targeting](./docs/images/After%20identifying%20four%20points.jpg)
+
+### 3. Live AI Execution & Telemetry
+Once a scan is initiated, the platform leverages optimized concurrent API requests and long-polling to provide live feedback. The YOLOv8 object detection model scans the sectors, pinpointing commercial trucks with high confidence scores in real-time.
+
+![Processing Execution](./docs/images/Scan%20processing%20progress%20status.jpg)
+
+![Scan Complete](./docs/images/After%20the%20scan%20processing%20is%20complete.jpg)
+
+### 4. Operational Audit & Archive
+A structured archive system for tracking historical operations. Every scan retains detailed coordinates, confidence scores, and processing timelines for auditing and future data analysis.
+
+![Operations Archive](./docs/images/Archive%20of%20previous%20scan%20processes.png)
+
+---
 
 ## Technical Architecture
 
-This system is built with a focus on performance, scalability, and clean code principles.
+This system is engineered with a strict focus on performance, scalability, and clean code principles.
 
-**Backend (The Engine):**
-*   **Laravel 11:** Serves as a robust API and logic handler.
-*   **Eloquent Optimization:** Utilizes Eager Loading and direct Database Pagination to handle potentially thousands of fleet records without memory bottlenecks (N+1 query prevention).
-*   **Laravel Breeze:** Secure, modern authentication scaffolding.
+### Backend (The Engine)
+* **Laravel 11:** Serves as a robust API and logic handler.
+* **Eloquent Optimization:** Utilizes Eager Loading and direct Database Pagination to handle thousands of fleet records without memory bottlenecks (Zero N+1 queries).
+* **Job Queues & Background Processing:** Asynchronous handling of Mapbox satellite image fetching and heavy ML processing.
+* **Laravel Breeze:** Secure, modern authentication scaffolding with Role-Based Access Control (RBAC).
 
-**Frontend (The Interface):**
-*   **React 18 & Inertia.js:** Delivers a lightning-fast Single Page Application (SPA) experience without the complexity of a standalone API and state management like Redux.
-*   **Tailwind CSS:** Fully responsive, modern "Glassmorphism" UI design, ensuring the dashboard looks phenomenal across all devices.
+### Frontend (The Interface)
+* **React 18 & Inertia.js:** Delivers a lightning-fast Single Page Application (SPA) experience without the overhead of standalone API routing or complex state management architectures.
+* **Tailwind CSS:** Fully responsive, modern UI design ensuring optimal viewing across all dispatch environments.
+* **Leaflet & Mapbox:** High-performance, interactive geospatial mapping integration.
 
-**AI & Computer Vision:**
-*   **YOLOv8:** Trained on a custom dataset for high-accuracy commercial truck detection.
+### AI & Computer Vision
+* **YOLOv8:** Custom-trained object detection model (managed via Roboflow) specifically tuned for identifying commercial logistical assets from aerial perspectives.
+
+---
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+Follow these instructions to spin up the project in your local development environment.
 
 ### Prerequisites
-*   PHP 8.2+
-*   Composer
-*   Node.js & npm
-*   MySQL / PostgreSQL
-*   Mapbox API Token
+* PHP 8.2+
+* Composer
+* Node.js & npm
+* MySQL / PostgreSQL
+* Mapbox API Token
 
 ### Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/alaa2980/scanops.git](https://github.com/alaa2980/scanops.git)
-    cd scanops
-    ```
+**1. Clone the repository:**
+```bash
+git clone https://github.com/alaa2980/scanops.git
+cd scanops
+```
 
-2.  **Install PHP dependencies:**
-    ```bash
-    composer install
-    ```
+**2. Install dependencies:**
+```bash
+composer install
+npm install
+```
 
-3.  **Install Node dependencies:**
-    ```bash
-    npm install
-    ```
+**3. Environment Setup:**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+Configure your database credentials and append your Mapbox token (MAPBOX_TOKEN & VITE_MAPBOX_TOKEN) in the .env file.
 
-4.  **Environment Setup:**
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-    *Make sure to configure your database credentials and add your `VITE_MAPBOX_TOKEN` in the `.env` file.*
 
-5.  **Run Migrations & Seeders:**
-    ```bash
-    php artisan migrate --seed
-    ```
+**4. Run Migrations & Link Storage:**
+```bash
+php artisan migrate --seed
+php artisan storage:link
+```
 
-6.  **Serve the Application:**
-    Open two terminal windows to run both the backend and the frontend build tool:
-    ```bash
-    # Terminal 1
-    php artisan serve
+**5. Serve the Application:**
+Open three terminal windows to run the backend, queue worker, and frontend build tool concurrently:
 
-    # Terminal 2
-    npm run dev
-    ```
+```bash
+# Terminal 1: Backend Server
+php artisan serve
+
+# Terminal 2: Queue Worker (For AI Image Processing)
+php artisan queue:work
+
+# Terminal 3: Vite Dev Server
+npm run dev
+```
 
 ## Developer
 
-Developed with passion by a **Full-Stack Software Engineer** specializing in modern web, mobile development, and AI integrations. Built to solve real-world operational challenges.
+Developed by Alaa Moh. Al-Waseai — A Full-Stack Software Engineer & Web/Mobile Developer specializing in modern architectures, logical system design, and AI integrations. Built to solve real-world operational challenges through structured frameworks.
