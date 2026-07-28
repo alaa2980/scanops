@@ -158,7 +158,16 @@ export default function CreateYardScan() {
 
                 if (statusRes.data.ok) {
                     setScanState(statusRes.data.status);
-                    if (statusRes.data.status === 'completed' || statusRes.data.status === 'failed') {
+                    
+                    if (statusRes.data.status === 'completed') {
+                        // الحل: إجبار التقدم ليكون 100% لأن العملية اكتملت بنجاح بالفعل
+                        setProgress(prev => ({
+                            ...prev,
+                            percent: 100,
+                            finished: prev.total || progressRes.data.total_cells
+                        }));
+                        clearInterval(pollInterval);
+                    } else if (statusRes.data.status === 'failed') {
                         clearInterval(pollInterval);
                     }
                 }
@@ -227,7 +236,8 @@ export default function CreateYardScan() {
         <AppLayout>
             <Head title="ScanOps | Geospatial Targeting" />
             
-            <div className="relative rounded-[2rem] border border-white/5 overflow-hidden shadow-2xl bg-[#050505]">
+            {/* <div className="relative rounded-[2rem] border border-white/5 overflow-hidden shadow-2xl bg-[#050505]"> */}
+            <div className="relative h-full w-full rounded-[2rem] border border-white/5 overflow-hidden shadow-2xl bg-[#050505]">
                 
                 {/* Enterprise HUD (Heads Up Display) Panel */}
                 <div className="absolute top-6 left-6 right-6 z-[1000] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pointer-events-none">
