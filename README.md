@@ -6,6 +6,14 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-00FFFF?style=for-the-badge&logo=yolo&logoColor=black)
 
+> **⚠️ Commercial Enterprise Product & AI Intellectual Property**
+> 
+> Please note that this repository contains the core web architecture of a **proprietary, enterprise-grade logistics and AI-powered yard management platform available for B2B purchase, licensing, and custom deployment**. 
+> 
+> The source code is made public here exclusively as a **Proof of Work** to showcase the system's structural integrity, the seamless integration of Computer Vision (YOLOv8), and advanced backend orchestration to prospective clients and enterprise partners. The custom-trained machine learning models and proprietary AI processing pipelines remain strictly closed-source. This is a commercial product and is not authorized for free commercial replication. For business inquiries, enterprise licensing, or system demonstrations, please contact the developer directly.
+
+---
+
 **ScanOps** is an enterprise-grade B2B platform designed specifically for the construction and logistics sectors. It bridges the gap between modern web applications and computer vision, enabling operations teams to scan large logistical yards via satellite imagery and automatically detect commercial truck fleets using advanced Machine Learning models.
 
 ---
@@ -73,7 +81,7 @@ Follow these instructions to spin up the project in your local development envir
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/alaa2980/scanops.git
+git clone [https://github.com/alaa2980/scanops.git](https://github.com/alaa2980/scanops.git)
 cd scanops
 ```
 
